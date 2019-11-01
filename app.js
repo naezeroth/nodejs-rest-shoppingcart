@@ -14,8 +14,8 @@ const seeder = require('./routes/seeder/products');
 
 var app = express();
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
+// const PORT = 3000;
+// app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
 
 //Import the mongoose module
 const mongoose = require('mongoose');

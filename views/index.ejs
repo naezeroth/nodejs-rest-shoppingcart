@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2>Welcome to Apurva's <%= title %></h2>
+    <h3>USER endpoints</h3>
+    <p>GET /items</p>   
+    <p>
+      Returns list of all items: <br/>
+      {success:true, items: Item[]}
+    </p>
+    <p>GET /item/{id}</p>
+    <p>
+      Returns specific item given id </br>
+      {success:true, item: Item} </br>
+      Errors: If id of item cannot be found </br>
+      {success:false, message:"Item could not be found"} </br>
+    </p>
+    <p>GET /orders</p> 
+    <p>
+      Returns list of all orders: </br>
+      {success:true, orders: Order[]}
+    </p>
+    <p>GET /order/{id}</p>
+    <p>  
+      Returns specific order given id </br>
+      {success:true, order: Order} </br>
+      Errors: If id of order cannot be found </br>
+      {success:false, message:"Order could not be found"}</br>
+    </p>    
+    <p>POST /orders</p>
+      <p>Request an order to a specific item</br>
+      req.body:{itemId: [ITEM_ID], quantity: [AMOUNT] }</br>  
+      Returns message if successful </br>
+      {success:true, order: Order} </br>
+      If item could not be found:</br>
+      {success:false, message:"Item could not be found"}</br>
+      If item does not have enough stock:</br>
+      {success:false, message:"Item does not have enough stock"}</br>
+      If req.body not valid:</br>
+      {success:false, messsage:"Invalid request"}</br>
+      </p> 
+      
+    <h3>ADMIN endpoints</h3>
+    <p>
+      For simplicity, every admin request is appended with a header: </br>
+      Authentication: "Bearer {token}". If it contains the right token </br>
+      you can assume it was from an admin user.</br>
+    </p>
+      
+    <p>ALL</p>
+    
+    <p>
+      If user not an admin:</br>
+      {success:false, message:"Unauthorized"}</br>
+      If req.body not valid:</br>
+      {success:false, messsage:"Invalid request"}</br>
+    </p> 
+      
+    <p> POST /items </p>
+      
+    <p> 
+      Admin can add new items to the system. If the item already exists
+      then increase its quantity.</br>
+      req.body:</br>
+      {items: {type:string; color:string; size:"S"|"M"|"L"; stock:number;}[]}</br>
+      Returns:</br>
+      {success:true, itemIds: string[]}</br>
+      If one (or more) of the items is invalid:</br>
+      {success:false, message:"One (or more) items are invalid"}</br>
+    </p>
+      
+    <p> PATCH /item/{id} </p>
+      
+    <p>Admin can edit the quantity for a given item in the system.</br>
+      This should change the stock number for a given item, not add to it.</br>
+      req.body:</br>
+      {stock:number;}</br>
+    </p>
+
+    <p>DELETE /item/{id} </p>
+      
+    <p>Return:</br>
+      {success:true}</br>
+      If item id could not be found:</br>
+      {success:false, message:"Item could not be found"}</br>
+    </p>
+      
+    <h3>OBJECTS</h3>
+
+    <p>
+      interface Item {</br>
+      id: string;</br>
+      type: string;</br>
+      color: string;</br>
+      size: "S" | "M" | "L";</br>
+      stock: number;</br>
+      }</br>
+
+      interface Order {</br>
+      id: string;</br>
+      itemId: string;</br>
+      quantity: number;</br>
+      }</br>
+    </p>
+      <h3>ADMIN TOKEN:</h3>
+      <p>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NjI1NzI0NjQsImV4cCI6MTU5NDEwODQ2OSwiYXVkIjoid3d3LnN0dWRlbnRzLjJoYXRzLmNvbS5hdSIsInN1YiI6InVzZXJAMmhhdHMuY29tLmF1IiwiR2l2ZW5OYW1lIjoiSm9obiIsIlN1cm5hbWUiOiJTbm93IiwiRW1haWwiOiJqb2huc25vd0AyaGF0cy5jb20uYXUiLCJSb2xlIjoiSmFuaXRvciJ9.BEEqb2ihfP0ec8TBu91T9lk0kcBKpz1NkJv4PpyjxdE</p>
+  </body>
+</html>

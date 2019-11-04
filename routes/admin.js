@@ -61,6 +61,7 @@ router.post('/items', auth, (req, res) => {
                 else if(product){
                     product.stock = data[3];
                     product.save();
+                    toReturn.push(product._id);
                 }
                 else{
                     var p = new Product({
